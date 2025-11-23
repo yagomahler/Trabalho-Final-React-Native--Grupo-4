@@ -29,7 +29,7 @@ export function StackNavigator() {
     return (
 
         <Stack.Navigator id={undefined}>
-             <Stack.Screen name="MainTabs" component={BottomTabNavigator} />
+             <Stack.Screen name="MainTabs" component={BottomTabNavigator} options={{headerShown: false}}/>
             <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
             <Stack.Screen name="Sobre" component={Sobre}  options={{headerShown: false}}/>
             {/*<Stack.Screen name="Player" component={Player}  options={{headerShown: false}}/>*/}
