@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
-    borderColor: "magenta",
+    borderColor: "#aa00a9",
     borderWidth: 1,
     zIndex: 2,
   },
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
   },
   cardBox: {
     borderWidth: 2,
-    borderColor: "magenta",
+    borderColor: "#aa00a9",
     margin: 5,
     borderRadius: 30,
     zIndex: 2,
