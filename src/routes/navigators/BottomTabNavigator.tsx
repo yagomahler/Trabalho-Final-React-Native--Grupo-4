@@ -2,7 +2,7 @@ import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../../screens/Home';
 import { Sobre } from '../../screens/Sobre';
-//import { Player } from '../../screens/Player';
+import PlayerScreen from '../../screens/Player';
 //import { Login } from '../../screens/Login';
 
 import Entypo from '@expo/vector-icons/Entypo';
@@ -35,13 +35,13 @@ export function BottomTabNavigator() {
           )
         }}
       />
-     {/*<Tab.Screen name="Player" component={Player}
+     <Tab.Screen name="Player" component={PlayerScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <Entypo name="shopping-cart" size={24} color={color} />
+            <Entypo name="controller-play" size={24} color={color} />
           )
         }}
-      /> */}
+      />
 
       <Tab.Screen name="Sobre" component={Sobre}
       options={{
