@@ -1,8 +1,11 @@
 import React from 'react'
+import { View } from 'react-native'
 
 const APIAPI = () => {
   return (
-    <div>APIAPI</div>
+    <View>
+      APIAPI      
+    </View>
   )
 }
 
