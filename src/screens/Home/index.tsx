@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ScrollView } from 'react-native';
-import { HomePageNavigationProp } from '../../routes/navigators/StackNavigator';
-import { styles } from './styles';
-import ApiMusical from '../../services/ApiMusical';
 import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useState } from 'react';
+import { Animated, Image, ScrollView, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { HomePageNavigationProp } from '../../routes/navigators/StackNavigator';
+import ApiMusical from '../../services/ApiMusical';
+import { styles } from './styles';
 export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigation }) => {
   const [dadosCards, setDadosCards] = useState<{ img: string }[]>([]);
   useEffect(() => {
@@ -11,7 +11,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
   }, []);
   const carregarArtistasAleatorios = async () => {
     try {
-      // Lista grande de artistas da API do Deezer (IDs reais, variados)
       const artistasIds = [
         "3054","66","17003","115","75798","3106","9052","639","3823","14046","406","35","447359",
         "936","95768","647","719","637","8691","3543","339","4244791","816","13544","2118","2127",
@@ -32,30 +31,46 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
     } catch (error) {
       console.log("Erro ao carregar artistas:", error);
     }
-  }
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.perfil}>
-        <Image
-          source={{ uri: "" }}
-          style={styles.perfilImagem}
-        />
+        <Image source={{ uri: "" }} style={styles.perfilImagem} />
         <Text style={styles.perfilNome}>Nome</Text>
       </View>
-      <Text style={styles.titulo}>Recomendados</Text>
+      <Text style={styles.titulo}>Artistas recomendados</Text>
       <View style={styles.cards}>
-        {dadosCards.map((item, index) => (
-          <View key={index} style={styles.cardBox}>
-            <Image source={{ uri: item.img }} style={styles.cardImg} />
-          </View>
-        ))}
+        {dadosCards.map((item, index) => {
+          const scale = new Animated.Value(1);
+          const animar = () => {
+            Animated.sequence([
+              Animated.timing(scale, {
+                toValue: 0.9,
+                duration: 100,
+                useNativeDriver: true,
+              }),
+              Animated.timing(scale, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true,
+              })
+            ]).start();
+          };
+          return (
+            <TouchableWithoutFeedback key={index} onPress={animar}>
+              <Animated.View style={[styles.cardBox, { transform: [{ scale }] }]}>
+                <Image source={{ uri: item.img }} style={styles.cardImg} />
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          );
+        })}
       </View>
-        <LinearGradient
-      colors={['transparent', '#aa00a9']}
-      start={{ x: 0, y: 1 }}
-      end={{ x: 6, y: 1 }}
-      style={styles.gradient}
-    />
+      <LinearGradient
+        colors={['transparent', '#aa00a9']}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 6, y: 1 }}
+        style={styles.gradient}
+      />
     </ScrollView>
   );
 };

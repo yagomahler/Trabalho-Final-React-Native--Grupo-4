@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
   titulo: {
     color: "#fff",
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
     marginVertical: 10,
