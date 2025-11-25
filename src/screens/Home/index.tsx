@@ -38,8 +38,8 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
         <Image source={{ uri: "" }} style={styles.perfilImagem} />
         <Text style={styles.perfilNome}>Nome</Text>
       </View>
-      <Text style={styles.titulo}>Artistas recomendados</Text>
-      <View style={styles.cards}>
+      <Text style={styles.recomendados}>Artistas recomendados</Text>
+      <View style={styles.cardsArtistas}>
         {dadosCards.map((item, index) => {
           const scale = new Animated.Value(1);
           const animar = () => {
@@ -58,8 +58,62 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
           };
           return (
             <TouchableWithoutFeedback key={index} onPress={animar}>
-              <Animated.View style={[styles.cardBox, { transform: [{ scale }] }]}>
+              <Animated.View style={[styles.cardBoxArtistas, { transform: [{ scale }] }]}>
                 <Image source={{ uri: item.img }} style={styles.cardImg} />
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          );
+        })}
+      </View>
+      <Text style={styles.recomendados}>Músicas recomendadas</Text>
+      <View style={styles.cardsMusicas}>
+        {dadosCards.map((item, index) => {
+          const scale = new Animated.Value(1);
+          const animar = () => {
+            Animated.sequence([
+              Animated.timing(scale, {
+                toValue: 0.9,
+                duration: 100,
+                useNativeDriver: true,
+              }),
+              Animated.timing(scale, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true,
+              })
+            ]).start();
+          };
+          return (
+            <TouchableWithoutFeedback key={index} onPress={animar}>
+              <Animated.View style={[styles.cardBoxMusicas, { transform: [{ scale }] }]}>
+                <Image source={{ uri: item.img }} style={styles.cardImgMusicas} />
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          );
+        })}
+      </View>
+      <Text style={styles.recomendados}>Álbuns recomendados</Text>
+      <View style={styles.cardsAlbuns}>
+        {dadosCards.map((item, index) => {
+          const scale = new Animated.Value(1);
+          const animar = () => {
+            Animated.sequence([
+              Animated.timing(scale, {
+                toValue: 0.9,
+                duration: 100,
+                useNativeDriver: true,
+              }),
+              Animated.timing(scale, {
+                toValue: 1,
+                duration: 100,
+                useNativeDriver: true,
+              })
+            ]).start();
+          };
+          return (
+            <TouchableWithoutFeedback key={index} onPress={animar}>
+              <Animated.View style={[styles.cardBoxAlbuns, { transform: [{ scale }] }]}>
+                <Image source={{ uri: item.img }} style={styles.cardImgAlbuns} />
               </Animated.View>
             </TouchableWithoutFeedback>
           );
