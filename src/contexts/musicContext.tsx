@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Track } from '../services/ApiMusical';
 
 interface ContextProps {
   children: React.ReactNode
 }
 
 interface MusicContextProviderProps {
-  favoritosList: ,
-  addMusicaFavoritos: ,
-  removeMusicaFavoritos: (index: string) => void,
+  favoritosList: Track[],
+  addMusicaFavoritos: (item: Track) => void,
+  removeMusicaFavoritos: (id: number) => void,
 
 }
 
@@ -20,7 +20,7 @@ export const MusicContext = createContext<MusicContextProviderProps>({
 });
 
 export const MusicProvider = ({ children }: ContextProps) => {
-  const [favoritosList, setFavoritosList] = useState<[]>([]);
+  const [favoritosList, setFavoritosList] = useState<Track[]>([]);
 
   useEffect(() => {
     monteListaFavoritos()
@@ -37,7 +37,7 @@ export const MusicProvider = ({ children }: ContextProps) => {
 
   };
 
-  function addMusicaFavoritos(item:  ) {
+  function addMusicaFavoritos(item: Track) {
     setFavoritosList(oldList => {
       let newList = [...oldList, item];
 
@@ -48,9 +48,9 @@ export const MusicProvider = ({ children }: ContextProps) => {
 
   };
 
-  function removeMusicaFavoritos(index: string) {
+  function removeMusicaFavoritos(id: number) {
     setFavoritosList(oldList => {
-      let newList = oldList.filter(item => item.index !== index);
+      let newList = oldList.filter(item => item.id !== id);
 
       storeData(newList);
 
@@ -59,7 +59,7 @@ export const MusicProvider = ({ children }: ContextProps) => {
     });
   };
 
-  const storeData = async (value: ) => {
+  const storeData = async (value: Track[]) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('favorito-list', jsonValue)
@@ -69,7 +69,7 @@ export const MusicProvider = ({ children }: ContextProps) => {
 
   };
 
-  async function getData(): Promise<[]> {
+  async function getData(): Promise<Track[]> {
     try {
       const jsonValue = await AsyncStorage.getItem('favorito-list');
       return jsonValue != null ? JSON.parse(jsonValue) : [];
