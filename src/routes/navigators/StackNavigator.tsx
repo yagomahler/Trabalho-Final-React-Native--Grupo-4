@@ -5,7 +5,7 @@ import Home from '../../screens/Home'
 import Sobre from '../../screens/Sobre';
 import { BottomTabNavigator } from './BottomTabNavigator';
 //import Player from '../../screens/Player';
-//import Login from '../../screens/Login';
+import Login from '../../screens/Login';
 //import Album from '../../screens/Album';
 
 
@@ -16,13 +16,14 @@ export type Parametros = {
     MainTabs: undefined; 
     Home: { id: String };
     Sobre: { id: String };
+    Login: { id: String };
 }
 
 
 export type HomePageNavigationProp = StackNavigationProp<Parametros, 'Home'>;
 export type SobrePageNavigationProp = StackNavigationProp<Parametros, 'Sobre'>;
 //export type PlayerPageNavigationProp = StackNavigationProp<Parametros, 'Player'>;
-//export type LoginPageNavigationProp = StackNavigationProp<Parametros, 'Login'>;
+export type LoginPageNavigationProp = StackNavigationProp<Parametros, 'Login'>;
 //export type AlbumPageNavigationProp = StackNavigationProp<Parametros, 'Album'>;
 
 export function StackNavigator() {
@@ -33,7 +34,7 @@ export function StackNavigator() {
             <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
             <Stack.Screen name="Sobre" component={Sobre}  options={{headerShown: false}}/>
             {/*<Stack.Screen name="Player" component={Player}  options={{headerShown: false}}/>*/}
-           {/* <Stack.Screen name="Login" component={Login}  options={{headerShown: false}}/>*/}
+           <Stack.Screen name="Login" component={Login}  options={{headerShown: false}}/>
            {/* <Stack.Screen name="Album" component={Album}  options={{headerShown: false}}/>*/}
         </Stack.Navigator>
     );

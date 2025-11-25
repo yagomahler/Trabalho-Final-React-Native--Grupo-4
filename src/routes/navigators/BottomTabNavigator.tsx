@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../../screens/Home';
 import { Sobre } from '../../screens/Sobre';
 import PlayerScreen from '../../screens/Player';
-//import { Login } from '../../screens/Login';
+import { Login } from '../../screens/Login';
 
 import Entypo from '@expo/vector-icons/Entypo';
 
@@ -50,12 +50,12 @@ export function BottomTabNavigator() {
           )
         }}/>
 
-      {/*<Tab.Screen name="Login" component={Login}
+      <Tab.Screen name="Login" component={Login}
       options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="login" size={24} color={color} />
           )
-        }}/> */}
+        }}/>
     </Tab.Navigator>
   );
 }
