@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1C1C1C",
+    backgroundColor: "#000",
     alignItems: "center",
     marginTop: 35,
     justifyContent: "center",
     zIndex: 2,
   },
-
   avatarContainer: {
     marginBottom: 50,
     width: 100,
@@ -74,5 +73,3 @@ const styles = StyleSheet.create({
     height: "150%",
   },
 });
-
-export default styles;
