@@ -27,7 +27,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios');
+                const response = await axios.get('https://69236cb13ad095fb847084f7.mockapi.io/usuarios');
                 setUsuariosList(response.data);
                 setLoading(false);
             } catch (error) {
@@ -93,12 +93,9 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 value={password}
                 secureTextEntry
             />
-
-
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
-
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cadastro', {id: "Grupo4"})}>
                 <Text style={styles.buttonText}>Criar Conta</Text>
             </TouchableOpacity>

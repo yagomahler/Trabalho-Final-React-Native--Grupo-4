@@ -11,7 +11,7 @@ export const Perfil: React.FC<{ navigation: PerfilPageNavigationProp }> = ({ nav
     const [usuariosList, setUsuariosList] = useState([]);
 
     
-    axios.put ('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios',{
+    axios.put ('https://69236cb13ad095fb847084f7.mockapi.io/usuarios',{
     }).then (response => {
         setUsuariosList (response.data);
     });
@@ -20,7 +20,7 @@ export const Perfil: React.FC<{ navigation: PerfilPageNavigationProp }> = ({ nav
             useremail: useremail,
             password: password,
         };  
-        axios.put('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', updatedUsuario)
+        axios.put('https://69236cb13ad095fb847084f7.mockapi.io/usuarios', updatedUsuario)
         .then(response => {
             console.log('Usuário atualizado com sucesso:', response.data);
             navigation.navigate('Home', {id: 'grupo 04' });

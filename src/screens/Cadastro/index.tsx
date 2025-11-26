@@ -6,21 +6,27 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './styles';
 
-export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
+export const Cadastro: React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
+
+    const [username, setUsername] = useState('');
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
-    const [usuariosList, setUsuariosList] = useState([]);
-    
-    axios.post ('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios',{
-    }).then (response => {
-        setUsuariosList (response.data);
-    }); 
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     const handleCadastro = () => {
+
+        if (password !== confirmPassword) {
+            console.log("As senhas não coincidem!");
+            return;
+        }
+
         const novoUsuario = {   
+            username: username,
             useremail: useremail,
             password: password,
         };  
-        axios.post('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', novoUsuario)
+
+        axios.post('https://69236cb13ad095fb847084f7.mockapi.io/usuarios', novoUsuario)
         .then(response => {
             console.log('Usuário cadastrado com sucesso:', response.data);
             navigation.navigate('Login', { id: 'grupo 04' });
@@ -29,7 +35,8 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
             console.error('Erro ao cadastrar usuário:', error);
         });
     };  
-        return (
+
+    return (
         <View style={styles.container}>
             <View style={styles.avatarContainer}>
                 <Feather name="user-plus" size={80} color="#fff" marginLeft={15}/>
@@ -39,9 +46,8 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
                 style={styles.input}
                 placeholder="Nome"
                 placeholderTextColor="#aaa"
-                onChangeText={setUseremail}
-                value={useremail}
-                autoCapitalize="none"
+                onChangeText={setUsername}
+                value={username}
             />
             <TextInput
                 style={styles.input}
@@ -59,12 +65,13 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
                 value={password}
                 secureTextEntry
             />
+
             <TextInput
                 style={styles.input}
                 placeholder="Confirmar Senha"
                 placeholderTextColor="#aaa"
-                onChangeText={setPassword}
-                value={password}
+                onChangeText={setConfirmPassword}
+                value={confirmPassword}
                 secureTextEntry
             />
             <TouchableOpacity style={styles.button} onPress={handleCadastro}>
@@ -81,5 +88,6 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
             />
         </View>
     );
-}
+};
+
 export default Cadastro;
