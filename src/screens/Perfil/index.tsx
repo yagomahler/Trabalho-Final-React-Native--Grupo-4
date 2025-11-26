@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text , TextInput,Button, TouchableOpacity } from 'react-native';
 import { PerfilPageNavigationProp } from '../../routes/navigators/StackNavigator';
-import { styles } from './style';
+import { styles } from './styles';
 import Feather from '@expo/vector-icons/build/Feather';
 
 export const Perfil: React.FC<{ navigation: PerfilPageNavigationProp }> = ({ navigation }) => {
@@ -23,7 +23,7 @@ export const Perfil: React.FC<{ navigation: PerfilPageNavigationProp }> = ({ nav
         axios.put('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', updatedUsuario)
         .then(response => {
             console.log('Usuário atualizado com sucesso:', response.data);
-            navigation.navigate('Home');
+            navigation.navigate('Home', {id: 'grupo 04' });
         })
         .catch(error => {
             console.error('Erro ao atualizar usuário:', error);
@@ -39,7 +39,7 @@ export const Perfil: React.FC<{ navigation: PerfilPageNavigationProp }> = ({ nav
         axios.delete('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios')
         .then(response => {
             console.log('Usuário deletado com sucesso:', response.data);
-            navigation.navigate('Home');
+            navigation.navigate('Home', {id: 'grupo 04' });
         })
         .catch(error => {
             console.error('Erro ao deletar usuário:', error);
