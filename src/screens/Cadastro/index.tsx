@@ -17,25 +17,28 @@ export const Cadastro: React.FC<{ navigation: CadastroPageNavigationProp }> = ({
 
         if (password !== confirmPassword) {
             console.log("As senhas não coincidem!");
+            alert("As senhas precisam ser iguais. Tente novamente.");
             return;
         }
 
-        const novoUsuario = {   
-            username: username,
-            useremail: useremail,
-            password: password,
-        };  
+        const novoUsuario = {
+    name: username,
+    email: useremail,
+    password: password,
+};
 
-        axios.post('https://69236cb13ad095fb847084f7.mockapi.io/usuarios', novoUsuario)
+
+        axios.post('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', novoUsuario)
         .then(response => {
             console.log('Usuário cadastrado com sucesso:', response.data);
+            alert('Cadastro realizado com sucesso!');
             navigation.navigate('Login', { id: 'grupo 04' });
         })
         .catch(error => {
             console.error('Erro ao cadastrar usuário:', error);
+            alert('Erro ao realizar cadastro. Tente novamente.');
         });
     };  
-
     return (
         <View style={styles.container}>
             <View style={styles.avatarContainer}>
