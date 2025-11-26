@@ -5,21 +5,23 @@ import { Home } from '../../screens/Home';
 import { Sobre } from '../../screens/Sobre';
 import PlayerScreen from '../../screens/Player';
 import { Login } from '../../screens/Login';
-
+import Favoritos from '../../screens/Favoritos';
 import Entypo from '@expo/vector-icons/Entypo';
+
 
 
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-export type RootTabParamList ={
-Home: {id: String};
-Player: {id: String};
-Sobre: {id: String};
-Login: {id: String};
+export type RootTabParamList = {
+  Home: { id: String };
+  Player: { id: String };
+  Sobre: { id: String };
+  Login: { id: String };
+  Favoritos: undefined;
 };
 
-export function BottomTabNavigator() {  
+export function BottomTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -31,12 +33,12 @@ export function BottomTabNavigator() {
     >
       <Tab.Screen name="Home" component={Home}
         options={{
-             tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }) => (
             <Entypo name="home" size={24} color={color} />
           )
         }}
       />
-     <Tab.Screen name="Player" component={PlayerScreen}
+      <Tab.Screen name="Player" component={PlayerScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="controller-play" size={24} color={color} />
@@ -45,18 +47,28 @@ export function BottomTabNavigator() {
       />
 
       <Tab.Screen name="Sobre" component={Sobre}
-      options={{
+        options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="open-book" size={24} color={color} />
           )
-        }}/>
+        }} />
+
+      <Tab.Screen
+        name="Favoritos"
+        component={Favoritos}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="heart" size={24} color={color} />
+          ),
+        }}
+      />
 
       <Tab.Screen name="Login" component={Login}
-      options={{
+        options={{
           tabBarIcon: ({ color }) => (
             <Entypo name="login" size={24} color={color} />
           )
-        }}/>
+        }} />
     </Tab.Navigator>
   );
 }

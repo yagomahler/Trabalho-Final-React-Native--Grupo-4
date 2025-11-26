@@ -8,7 +8,7 @@ import Player from '../../screens/Player';
 import Login from '../../screens/Login';
 import Cadastro from '../../screens/Cadastro';
 import Perfil from '../../screens/Perfil';
-//import Album from '../../screens/Album';
+import Album from '../../screens/Album';
 
 
 
@@ -22,7 +22,7 @@ export type Parametros = {
     Cadastro: { id: String };
     Perfil: { id: String };
     Player: { id: String };
-    //Album: { id: String
+    Album: { albumId: String}
 }
 
 
@@ -32,7 +32,7 @@ export type PlayerPageNavigationProp = StackNavigationProp<Parametros, 'Player'>
 export type LoginPageNavigationProp = StackNavigationProp<Parametros, 'Login'>;
 export type CadastroPageNavigationProp = StackNavigationProp<Parametros, 'Cadastro'>;
 export type PerfilPageNavigationProp = StackNavigationProp<Parametros, 'Perfil'>;
-//export type AlbumPageNavigationProp = StackNavigationProp<Parametros, 'Album'>;
+export type AlbumPageNavigationProp = StackNavigationProp<Parametros, 'Album'>;
 
 export function StackNavigator() {
     return (
@@ -45,7 +45,7 @@ export function StackNavigator() {
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
             <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
-            {/* <Stack.Screen name="Album" component={Album}  options={{headerShown: false}}/>*/}
+            <Stack.Screen name="Album" component={Album}  options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 }

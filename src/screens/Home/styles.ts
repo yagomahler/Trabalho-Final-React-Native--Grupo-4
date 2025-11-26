@@ -18,8 +18,6 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
-    // borderColor: "#aa00a9",
-    // borderWidth: 1,
     borderWidth: 1,
     borderColor: "#000",
     boxShadow: "1px 1px 1px 1px #aa00a9",
@@ -120,4 +118,19 @@ export const styles = StyleSheet.create({
     width: "150%",
     height: "150%",
   },
+
+
+  albumTitleText: {
+    color: '#FFF',
+    marginTop: 8,
+    fontSize: 14,
+    fontWeight: 'bold',
+    paddingHorizontal: 5,
+  },
+  artistNameText: {
+    color: '#B3B3B3',
+    fontSize: 12,
+    paddingHorizontal: 5,
+  },
+
 });

@@ -27,14 +27,13 @@ export const MusicProvider = ({ children }: ContextProps) => {
   }, []);
 
 
-  async function monteListaFavoritos() {
-
+ async function monteListaFavoritos() {
     try {
       let favoritoList = await getData();
+      setFavoritosList(favoritoList); 
     } catch {
       setFavoritosList([]);
     }
-
   };
 
   function addMusicaFavoritos(item: Track) {

@@ -22,6 +22,19 @@ export interface Track {
   preview: string; 
 };
 
+export interface AlbumDetails {
+    id: number;
+    title: string;
+    cover_xl: string;
+    artist: {
+        id: number;
+        name: string;
+    };
+    tracks: {
+        data: Track[];
+    };
+}
+
 export interface SearchResponse {
     data: Track[];
     total: number;
