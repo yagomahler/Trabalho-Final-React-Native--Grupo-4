@@ -1,11 +1,12 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { styles } from './styles';
 
 export const Sobre = () => {
   return (
-    <View style={styles.container}>Sobre
+    <View style={styles.container}>
+      <Text style={styles.title}>Sobre</Text>
     <LinearGradient
       colors={['transparent', '#aa00a9']}
       start={{ x: 0, y: 1 }}
@@ -15,5 +16,4 @@ export const Sobre = () => {
     </View>
   )
 }
-
-export default Sobre
+export default Sobre;
