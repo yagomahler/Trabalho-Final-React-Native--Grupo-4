@@ -14,7 +14,6 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
     axios.post ('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios',{
     }).then (response => {
         setUsuariosList (response.data);
-
     }); 
     const handleCadastro = () => {
         const novoUsuario = {   
