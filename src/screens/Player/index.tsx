@@ -63,7 +63,7 @@ export default function PlayerScreen() {
     if (sound) await sound.unloadAsync();
     setSound(null);
 
-    navigation.replace("PlayerScreen", {
+    navigation.replace("Player", {
       track: playlist[nextIndex],
       playlist,
       index: nextIndex
@@ -80,7 +80,7 @@ export default function PlayerScreen() {
     if (sound) await sound.unloadAsync();
     setSound(null);
 
-    navigation.replace("PlayerScreen", {
+    navigation.replace("Player", {
       track: playlist[prevIndex],
       playlist,
       index: prevIndex
