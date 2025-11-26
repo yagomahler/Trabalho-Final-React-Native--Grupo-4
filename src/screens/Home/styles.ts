@@ -34,7 +34,9 @@ export const styles = StyleSheet.create({
   },
   recomendados: {
     color: "#fff",
-    fontSize: 30,
+    fontSize: 25,
+    marginBottom: 20,
+    marginTop: 20,
     fontWeight: "bold",
     alignSelf: "center",
     marginVertical: 10,
@@ -93,6 +95,7 @@ export const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     zIndex: 2,
+    marginBottom: 20,
   },
   cardImgAlbuns: {
     width: 100,
