@@ -66,7 +66,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Cadastro', { id: 'Gurpo04' })}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cadastro', {id: "Grupo4"})}>
                 <Text style={styles.linkText}>Criar Conta</Text>
             </TouchableOpacity>
             <LinearGradient
