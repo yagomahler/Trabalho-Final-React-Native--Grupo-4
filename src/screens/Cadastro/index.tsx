@@ -2,11 +2,11 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from  './styles';
-import { CadrastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
+import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { useState } from 'react';
 import axios from 'axios';
 
-export const Cadastro : React.FC<{ navigation: CadrastroPageNavigationProp }> = ({ navigation }) => {
+export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
     const [usuariosList, setUsuariosList] = useState([]);
@@ -24,7 +24,7 @@ export const Cadastro : React.FC<{ navigation: CadrastroPageNavigationProp }> = 
         axios.post('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', novoUsuario)
         .then(response => {
             console.log('Usuário cadastrado com sucesso:', response.data);
-            navigation.navigate('Login');
+            navigation.navigate('Login', { id: 'grupo 04' });
         })
         .catch(error => {
             console.error('Erro ao cadastrar usuário:', error);
@@ -53,4 +53,4 @@ export const Cadastro : React.FC<{ navigation: CadrastroPageNavigationProp }> = 
         </View>
     );
 }
-export default styles;
+export default Cadastro;
