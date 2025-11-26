@@ -11,36 +11,34 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
     const [password, setPassword] = useState('');
     const [usuariosList, setUsuariosList] = useState([]);
 
-    
-    axios.get ('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios',{
-    }).then (response => {
-        setUsuariosList (response.data);
 
-    }); 
+    axios.get('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', {
+    }).then(response => {
+        setUsuariosList(response.data);
+
+    });
+    
     const handleLogin = async () => {
         const usuarioEncontrado = usuariosList.find(
             (usuario: { useremail: string; password: string }) =>
                 usuario.useremail === useremail && usuario.password === password
         );
+
+        try {
         if (usuarioEncontrado) {
             Alert.alert('Login bem-sucedido!');
-            
+            navigation.navigate('Perfil', { id: 'Grupo4' })
         } else {
             Alert.alert('Credenciais inválidas. Tente novamente.');
-        }
-        try {
-            const response = await axios.get('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios');
-            const usuarios = response.data;
-            setUsuariosList(usuarios);
-        }
+        }}
         catch (error) {
             console.error('Erro ao buscar usuários:', error);
-        }
-    
-};
-      return (
+        };
+
+    };
+    return (
         <View style={styles.container}>
-            
+
             <View style={styles.avatarContainer}>
                 <Feather name="user" size={80} color="#fff" />
             </View>
@@ -60,19 +58,19 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 placeholderTextColor="#aaa"
                 onChangeText={setPassword}
                 value={password}
-                secureTextEntry 
+                secureTextEntry
             />
 
             <TouchableOpacity >
-            <Text style={styles.linkText}>Esqueceu a Senha?</Text>
-            </TouchableOpacity>            
+                <Text style={styles.linkText}>Esqueceu a Senha?</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
-            <Text style={styles.linkText}>Criar Conta</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Cadastro', { id: 'Gurpo04' })}>
+                <Text style={styles.linkText}>Criar Conta</Text>
             </TouchableOpacity>
 
 
