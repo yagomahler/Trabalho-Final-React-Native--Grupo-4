@@ -38,7 +38,7 @@ export default function PlayerScreen() {
                 start={{ x: 0, y: 1 }}
                 end={{ x: 6, y: 1 }}
                 style={styles.gradient}
-              />
+        />
     </View>
   );
 }

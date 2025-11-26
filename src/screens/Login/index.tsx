@@ -51,7 +51,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
             />
             <TextInput
                 style={styles.input}
-                placeholder="Password"
+                placeholder="Senha"
                 placeholderTextColor="#aaa"
                 onChangeText={setPassword}
                 value={password}
@@ -67,7 +67,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cadastro', {id: "Grupo4"})}>
-                <Text style={styles.linkText}>Criar Conta</Text>
+                <Text style={styles.buttonText}>Criar Conta</Text>
             </TouchableOpacity>
             <LinearGradient
                 colors={['transparent', '#aa00a9']}

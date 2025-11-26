@@ -1,10 +1,10 @@
-
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import styles from  './styles';
-import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
-import { useState } from 'react';
+import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
+import { styles } from './styles';
 
 export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
     const [useremail, setUseremail] = useState('');
@@ -32,24 +32,54 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
     };  
         return (
         <View style={styles.container}>
-            <Text>Criar Conta</Text>
-
-            <Text>Registre-se com seu email</Text>
-
-            <Text>Email</Text>
+            <View style={styles.avatarContainer}>
+                <Feather name="user-plus" size={80} color="#fff" marginLeft={15}/>
+            </View>
+            <Text style={styles.title}>Cadastrar novo usuário</Text>
             <TextInput
-                keyboardType="email-address"
+                style={styles.input}
+                placeholder="Nome"
+                placeholderTextColor="#aaa"
+                onChangeText={setUseremail}
                 value={useremail}
-                onChangeText={text => setUseremail(text)}
+                autoCapitalize="none"
             />
-            <Text>Senha</Text>
             <TextInput
-                secureTextEntry={true}
-                value={password}
-                onChangeText={text => setPassword(text)}
+                style={styles.input}
+                placeholder="E-mail"
+                placeholderTextColor="#aaa"
+                onChangeText={setUseremail}
+                value={useremail}
+                autoCapitalize="none"
             />
-            <TouchableOpacity onPress={handleCadastro}><Text>Cadastrar</Text></TouchableOpacity>
-
+            <TextInput
+                style={styles.input}
+                placeholder="Senha"
+                placeholderTextColor="#aaa"
+                onChangeText={setPassword}
+                value={password}
+                secureTextEntry
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Confirmar Senha"
+                placeholderTextColor="#aaa"
+                onChangeText={setPassword}
+                value={password}
+                secureTextEntry
+            />
+            <TouchableOpacity style={styles.button} onPress={handleCadastro}>
+                <Text style={styles.buttonText}>Cadastrar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home', {id: "Grupo4"})}>
+                <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+            <LinearGradient
+                colors={['transparent', '#aa00a9']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 6, y: 1 }}
+                style={styles.gradient}
+            />
         </View>
     );
 }
