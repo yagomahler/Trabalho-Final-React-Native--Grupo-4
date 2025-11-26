@@ -79,7 +79,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
             </View>
             <TextInput
                 style={styles.input}
-                placeholder="Username"
+                placeholder="E-mail"
                 placeholderTextColor="#aaa"
                 onChangeText={setEmail}
                 value={email}
