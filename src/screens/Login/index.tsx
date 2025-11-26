@@ -1,11 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LoginPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './style';
-
-
 export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navigation }) => {
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
@@ -42,7 +41,6 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
             <View style={styles.avatarContainer}>
                 <Feather name="user" size={80} color="#fff" />
             </View>
-
             <TextInput
                 style={styles.input}
                 placeholder="Username"
@@ -51,7 +49,6 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 value={useremail}
                 autoCapitalize="none"
             />
-
             <TextInput
                 style={styles.input}
                 placeholder="Password"
@@ -72,8 +69,12 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
             <TouchableOpacity onPress={() => navigation.navigate('Cadastro', { id: 'Gurpo04' })}>
                 <Text style={styles.linkText}>Criar Conta</Text>
             </TouchableOpacity>
-
-
+            <LinearGradient
+                colors={['transparent', '#aa00a9']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 6, y: 1 }}
+                style={styles.gradient}
+            />
         </View>
     );
 };

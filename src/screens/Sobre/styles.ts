@@ -14,4 +14,11 @@ export const styles = StyleSheet.create({
     width: "150%",
     height: "150%",
   },
+  title: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginBottom: 10,
+    zIndex: 2,
+  },
 });

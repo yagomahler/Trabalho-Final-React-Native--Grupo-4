@@ -14,4 +14,18 @@ export const styles = StyleSheet.create({
     width: "150%",
     height: "150%",
   },
+  controls: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 20,
+    zIndex: 2,
+  },
+  trackTitle: {
+    color: "#fff",
+    fontSize: 400,
+    fontWeight: "bold",
+    marginBottom: 10,
+    zIndex: 2,
+  },
 });
