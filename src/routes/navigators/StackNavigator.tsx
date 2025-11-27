@@ -10,6 +10,7 @@ import Cadastro from '../../screens/Cadastro';
 import Perfil from '../../screens/Perfil';
 import Album from '../../screens/Album';
 import Pesquisa from '../../screens/Pesquisa'
+import ArtistaScreen from '../../screens/Artista';
 
 
 const Stack = createStackNavigator<Parametros>();
@@ -22,7 +23,8 @@ export type Parametros = {
     Cadastro: { id: String };
     Perfil: { userId: String };
     Player: { id: String };
-    Album: { albumId: String}
+    Album: { albumId: String};
+    Artista: {artistId: String};
     Pesquisa: {}
 }
 
@@ -49,6 +51,7 @@ export function StackNavigator() {
             <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
             <Stack.Screen name="Album" component={Album}  options={{headerShown: false}}/>
             <Stack.Screen name="Pesquisa" component={Pesquisa}  options={{headerShown: false}}/>
+             <Stack.Screen name="Artista" component={ArtistaScreen}  options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 }

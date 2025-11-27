@@ -20,6 +20,11 @@ interface AlbumCardData {
   artistName: string;
 }
 
+interface ArtistaCardData {
+  img: string;
+  artistIid: string;
+}
+
 interface MusicCardData {
   img: string;
   title: string;
@@ -130,10 +135,11 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       const selecionados = embaralhados.slice(0, 12);
       const requisicoes = selecionados.map((id) => ApiMusical.getArtist(id));
       const respostas = await Promise.all(requisicoes);
-      const imagens = respostas.map((res) => ({
+      const artistas = respostas.map((res) => ({
         img: res.data.picture_medium,
+        artistId: res.data.id.toString(),
       }));
-      setDadosCards(imagens);
+      setDadosCards(artistas);
     } catch (error) {
       console.log("Erro ao carregar artistas:", error);
     }
@@ -282,12 +288,17 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
         title: res.data.title,
         artistName: res.data.artist.name,
         preview: res.data.preview,
+        id: res.data.id.toString(),
       }));
 
       setDadosMusicas(musicas);
     } catch (error) {
       console.log("Erro ao carregar músicas:", error);
     }
+  };
+
+  const navegarParaArtista = (artistId: string) => {
+    navigation.navigate('Artista', { artistId });
   };
 
   const navegarParaMusica = (musica: MusicCardData) => {
@@ -314,6 +325,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       </View>
       <Text style={styles.recomendados}>Artistas recomendados</Text>
       <View style={styles.cardsArtistas}>
+
         {dadosCards.map((item, index) => {
           const scale = new Animated.Value(1);
           const animar = () => {
@@ -328,7 +340,9 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
                 duration: 100,
                 useNativeDriver: true,
               }),
-            ]).start();
+            ]).start(() => {
+              navegarParaArtista(item.artistaId);
+            });
           };
           return (
             <TouchableWithoutFeedback key={index} onPress={animar}>
