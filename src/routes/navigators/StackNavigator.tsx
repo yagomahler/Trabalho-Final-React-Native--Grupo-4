@@ -20,7 +20,7 @@ export type Parametros = {
     Sobre: { id: String };
     Login: { id: String };
     Cadastro: { id: String };
-    Perfil: { id: String };
+    Perfil: { userId: String };
     Player: { id: String };
     //Album: { id: String
 }
