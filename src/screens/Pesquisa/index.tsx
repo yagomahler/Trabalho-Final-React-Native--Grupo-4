@@ -102,7 +102,7 @@ export const Search: React.FC<{ navigation: HomePageNavigationProp }> = ({ navig
     const renderArtistItem = ({ item }: { item: Artist }) => (
         <TouchableOpacity 
             style={styles.resultItem} 
-            onPress={() => alert(`Navegar para Artista: ${item.name}. (A tela do artista ainda não foi implementada!)`)}
+            onPress={() => navigation.navigate('Artista', { artistId: item.id.toString() })}
         >
             <Image 
                 source={{ uri: item.picture_medium || 'https://placehold.co/50x50/333/FFF?text=Artista' }} 
