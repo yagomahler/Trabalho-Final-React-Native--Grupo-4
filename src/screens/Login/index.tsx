@@ -61,7 +61,7 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 });
 
                 Alert.alert('Login bem-sucedido!');
-                navigation.navigate('Perfil', { id: 'Grupo4' });
+                navigation.navigate('Perfil', { userId: 'Grupo4' });
             } else {
                 Alert.alert('Credenciais inválidas. Tente novamente.');
             }

@@ -126,6 +126,20 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     paddingHorizontal: 5,
   },
+  musicTitleText: {
+  color: '#fff',
+  fontSize: 14,
+  marginTop: 5,
+  fontWeight: 'bold',
+  width: '100%',
+  textAlign: 'center',
+},
+musicArtistText: {
+  color: '#ccc',
+  fontSize: 12,
+  width: '100%',
+  textAlign: 'center',
+},
   gradient: {
     position: "absolute",
     top: 0,

@@ -9,7 +9,7 @@ import Login from '../../screens/Login';
 import Cadastro from '../../screens/Cadastro';
 import Perfil from '../../screens/Perfil';
 import Album from '../../screens/Album';
-
+import Pesquisa from '../../screens/Pesquisa'
 
 
 const Stack = createStackNavigator<Parametros>();
@@ -23,6 +23,7 @@ export type Parametros = {
     Perfil: { userId: String };
     Player: { id: String };
     Album: { albumId: String}
+    Pesquisa: {}
 }
 
 
@@ -33,6 +34,7 @@ export type LoginPageNavigationProp = StackNavigationProp<Parametros, 'Login'>;
 export type CadastroPageNavigationProp = StackNavigationProp<Parametros, 'Cadastro'>;
 export type PerfilPageNavigationProp = StackNavigationProp<Parametros, 'Perfil'>;
 export type AlbumPageNavigationProp = StackNavigationProp<Parametros, 'Album'>;
+export type PesquisaPageNavigationProp = StackNavigationProp<Parametros, 'Pesquisa'>;
 
 export function StackNavigator() {
     return (
@@ -46,6 +48,7 @@ export function StackNavigator() {
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
             <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
             <Stack.Screen name="Album" component={Album}  options={{headerShown: false}}/>
+            <Stack.Screen name="Pesquisa" component={Pesquisa}  options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 }

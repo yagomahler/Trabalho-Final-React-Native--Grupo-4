@@ -1,14 +1,14 @@
+import React from 'react'; 
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useEffect } from 'react'; // <--- Removido useState
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { usePlayer } from '../../contexts/playerContext'; // <--- Importar usePlayer
+import { usePlayer } from '../../contexts/playerContext'; 
 
 export default function PlayerScreen() {
   const navigation = useNavigation() as any;
-  const { currentTrack, isPlaying, play, pause, next, prev } = usePlayer(); // <--- Usar o contexto
+  const { currentTrack, isPlaying, play, pause, next, prev } = usePlayer(); 
 
   const defaultTrack = {
     id: 1987151117,

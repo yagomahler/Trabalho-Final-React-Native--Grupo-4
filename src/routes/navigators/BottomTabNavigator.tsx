@@ -7,7 +7,7 @@ import PlayerScreen from '../../screens/Player';
 import { Login } from '../../screens/Login';
 import Favoritos from '../../screens/Favoritos';
 import Entypo from '@expo/vector-icons/Entypo';
-
+import Pesquisa from '../../screens/Pesquisa'
 
 
 
@@ -19,6 +19,7 @@ export type RootTabParamList = {
   Sobre: { id: String };
   Login: { id: String };
   Favoritos: undefined;
+  Pesquisa: {}
 };
 
 export function BottomTabNavigator() {
@@ -46,6 +47,13 @@ export function BottomTabNavigator() {
         }}
       />
 
+      <Tab.Screen name="Pesquisa" component={Pesquisa}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Entypo name="magnifying-glass" size={24} color={color} />
+          )
+        }} />
+
       <Tab.Screen name="Sobre" component={Sobre}
         options={{
           tabBarIcon: ({ color }) => (
@@ -69,6 +77,11 @@ export function BottomTabNavigator() {
             <Entypo name="login" size={24} color={color} />
           )
         }} />
+
+
+
     </Tab.Navigator>
+
+
   );
 }
