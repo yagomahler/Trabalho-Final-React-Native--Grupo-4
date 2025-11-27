@@ -275,7 +275,12 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
   };
   const carregarMusicasAleatorias = async () => {
     try {
-      const musicIds = ["2755530",];
+      const musicIds = ["2755530","598083842","10274043","528972091","127372473","3078853101",
+        "1126127102","6715839","14630182","6278220","606018","375242151","4685337","4685335",
+        "69862884","134946510","143060452","530300641","2293791","538586982","577487242",
+        "3412841","3412515","366076821","1509538522","1559717","106297606","142986206",
+        "129231820",
+      ];
 
       const embaralhados = musicIds.sort(() => Math.random() - 0.5);
       const selecionados = embaralhados.slice(0, 8);

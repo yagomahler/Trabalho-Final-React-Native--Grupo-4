@@ -26,8 +26,11 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginTop: 50,
-    marginLeft: 30,
+    // marginLeft: 40,
     marginBottom: 10,
+    // alignItems: "center",
+    // justifyContent: "center",
+    alignSelf: "center", 
     zIndex: 2,
   },
   trackImage: {

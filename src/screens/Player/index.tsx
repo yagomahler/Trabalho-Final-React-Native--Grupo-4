@@ -1,10 +1,10 @@
-import React from 'react'; 
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { usePlayer } from '../../contexts/playerContext';
 import { styles } from './styles';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { usePlayer } from '../../contexts/playerContext'; 
 
 export default function PlayerScreen() {
   const navigation = useNavigation() as any;
