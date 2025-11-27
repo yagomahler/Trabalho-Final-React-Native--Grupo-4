@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
 import { Animated, Image, ScrollView, Text, TouchableWithoutFeedback, View, } from "react-native";
 import { usePlayer } from "../../contexts/playerContext";
+import { useUser } from "../../contexts/userContext";
 import { HomePageNavigationProp } from "../../routes/navigators/StackNavigator";
 import ApiMusical, { AlbumDetails } from "../../services/ApiMusical";
 import { styles } from "./styles";
@@ -23,6 +24,8 @@ interface MusicCardData {
   preview: string;
   id: string
 }
+
+const { usuarioLogado } = useUser();
 export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
   navigation,
 }) => {
@@ -301,7 +304,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
     <ScrollView style={styles.container}>
       <View style={styles.perfil}>
         <Image source={{ uri: "" }} style={styles.perfilImagem} />
-        <Text style={styles.perfilNome}>Nome</Text>
+        <Text style={styles.perfilNome}>Olá, {usuarioLogado ? usuarioLogado.nome : "Nome"}!</Text>
       </View>
       <Text style={styles.recomendados}>Artistas recomendados</Text>
       <View style={styles.cardsArtistas}>

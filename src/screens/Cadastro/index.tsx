@@ -1,11 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
-import { styles } from './styles';
 import { cadastrarNovoUsuario } from '../../services/MockApi';
+import { styles } from './styles';
 
 export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
     const [usernome, setUsernome] = useState('');
