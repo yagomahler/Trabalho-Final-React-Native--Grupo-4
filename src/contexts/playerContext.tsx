@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Audio } from "expo-av";
 
-type Track = any;
+type Track = any;    
 type Playlist = Track[];
 
 interface PlayerContextProps {
@@ -24,32 +24,41 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  
-  const play = async (track: Track, newPlaylist?: Playlist, newIndex?: number) => {
+ 
+  const play = async (
+    track: Track,
+    newPlaylist?: Playlist,
+    newIndex?: number
+  ) => {
     try {
+      
       if (!track?.preview) return;
 
+  
       if (newPlaylist) setPlaylist(newPlaylist);
       if (typeof newIndex === "number") setIndex(newIndex);
 
+   
       if (sound) {
         await sound.unloadAsync();
         setSound(null);
       }
 
+      
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: track.preview },
         { shouldPlay: true }
       );
 
       setSound(newSound);
+
       setCurrentTrack(track);
+
       setIsPlaying(true);
     } catch (err) {
       console.log("Erro no play:", err);
     }
   };
-
 
   const pause = async () => {
     if (!sound) return;
@@ -57,16 +66,17 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     setIsPlaying(false);
   };
 
-
   const next = async () => {
     if (!playlist) return;
     const nextIndex = index + 1;
     if (nextIndex >= playlist.length) return;
 
     const nextTrack = playlist[nextIndex];
+
     await play(nextTrack, playlist, nextIndex);
   };
 
+  
   const prev = async () => {
     if (!playlist) return;
     const prevIndex = index - 1;
@@ -75,6 +85,7 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     const prevTrack = playlist[prevIndex];
     await play(prevTrack, playlist, prevIndex);
   };
+
 
   useEffect(() => {
     return () => {
@@ -92,7 +103,7 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
         play,
         pause,
         next,
-        prev
+        prev,
       }}
     >
       {children}
