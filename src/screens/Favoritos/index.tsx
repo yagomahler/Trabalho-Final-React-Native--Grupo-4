@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useMusicContext } from "../../contexts/musicContext";
 import { usePlayer } from "../../contexts/playerContext";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { styles } from "./styles";
 
@@ -35,8 +36,6 @@ const Favoritos = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titlePage}>Favoritos</Text>
-
       {favoritosList.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Icon name="heart-outline" size={70} color="#444" />
@@ -50,6 +49,12 @@ const Favoritos = () => {
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       )}
+      <LinearGradient
+                      colors={['transparent', '#aa00a9']}
+                      start={{ x: 0, y: 1 }}
+                      end={{ x: 6, y: 1 }}
+                      style={styles.gradient}
+      />
     </View>
   );
 };

@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#121212",
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    backgroundColor: "#000",
+    zIndex: 2,
+    marginTop: 35,
   },
   titlePage: {
     fontSize: 28,
@@ -54,5 +54,12 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     color: "#FFF",
     fontSize: 16,
+  },
+  gradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: "150%",
+    height: "150%",
   },
 });
