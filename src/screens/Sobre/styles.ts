@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#000",
     zIndex: 2,
     marginTop: 35,
+    paddingHorizontal: 20,
   },
   gradient: {
     position: "absolute",
@@ -17,9 +18,21 @@ export const styles = StyleSheet.create({
   title: {
     color: "#fff",
     fontSize: 30,
+    marginTop: 100,
     fontWeight: "bold",
-    marginBottom: 10,
+    alignSelf: "center",
     zIndex: 2,
   },
-  
+
+  description: {
+    color: "#fff",
+    fontSize: 16,
+    lineHeight: 22,
+    marginTop: 12,
+    zIndex: 2,
+  },
+  bold: {
+    fontWeight: "bold",
+    color: "#fff",
+  },
 });
