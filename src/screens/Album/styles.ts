@@ -102,5 +102,7 @@ export const styles = StyleSheet.create({
     right: 0,
     width: "150%",
     height: "150%",
+    zIndex: 1,
+    pointerEvents: 'none',
   },
 });

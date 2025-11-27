@@ -36,10 +36,16 @@ const Favoritos = () => {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={['transparent', '#aa00a9']}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 6, y: 1 }}
+        style={styles.gradient}
+      />
+
       {favoritosList.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Icon name="heart-outline" size={70} color="#444" />
-          <Text style={styles.emptyText}>Você ainda não tem favoritos.</Text>
+          {/* ... */}
         </View>
       ) : (
         <FlatList
@@ -49,12 +55,6 @@ const Favoritos = () => {
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       )}
-      <LinearGradient
-                      colors={['transparent', '#aa00a9']}
-                      start={{ x: 0, y: 1 }}
-                      end={{ x: 6, y: 1 }}
-                      style={styles.gradient}
-      />
     </View>
   );
 };

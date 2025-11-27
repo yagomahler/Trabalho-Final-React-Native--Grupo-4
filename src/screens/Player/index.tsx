@@ -1,17 +1,17 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react'; // <--- Removido useState
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Audio } from 'expo-av';
+import { usePlayer } from '../../contexts/playerContext'; // <--- Importar usePlayer
 
 export default function PlayerScreen() {
-  const route = useRoute();
   const navigation = useNavigation() as any;
+  const { currentTrack, isPlaying, play, pause, next, prev } = usePlayer(); // <--- Usar o contexto
 
   const defaultTrack = {
-    id: 1987151117, 
+    id: 1987151117,
     title: "Outubro de Fases",
     artist: { name: "Clube da Montanha" },
     album: {
@@ -20,91 +20,22 @@ export default function PlayerScreen() {
     preview:
       "https://cdnt-preview.dzcdn.net/api/1/1/e/2/e/0/e2e9480f64796a2873fe6861df7b9cee.mp3?hdnea=exp=1764207283~acl=/api/1/1/e/2/e/0/e2e9480f64796a2873fe6861df7b9cee.mp3*~data=user_id=0,application_id=42~hmac=08d63b5abd9147c8346c66f4e5a864adf6cb5acaa91ed2fe3745d1e65cbcfd67"
   };
+  
+  const track = currentTrack ?? defaultTrack;
+  
 
-  const params = route.params as any;
-
-  const track = params?.track ?? defaultTrack;
-  const playlist = params?.playlist ?? [defaultTrack];
-  const index = params?.index ?? 0;
-
-
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  async function playSound(uri: string) {
-    if (!uri) return;
-
-    if (sound) {
-      await sound.playAsync();
-      setIsPlaying(true);
-      return;
-    }
-
-    const { sound: newSound } = await Audio.Sound.createAsync(
-      { uri },
-      { shouldPlay: true }
-    );
-
-    setSound(newSound);
-    setIsPlaying(true);
-  }
-
-  async function pauseSound() {
-    if (!sound) return;
-    await sound.pauseAsync();
-    setIsPlaying(false);
-  }
-
-  useEffect(() => {
-    playSound(track.preview);
-
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
+  if (!currentTrack) {
       }
-    };
-  }, [track]);
 
-  async function nextTrack() {
-    if (!playlist) return;
-
-    const nextIndex = index + 1;
-    if (nextIndex >= playlist.length) return;
-
-    if (sound) await sound.unloadAsync();
-    setSound(null);
-
-    navigation.replace("Player", {
-      track: playlist[nextIndex],
-      playlist,
-      index: nextIndex
-    });
-  }
-
-  async function prevTrack() {
-    if (!playlist) return;
-
-    const prevIndex = index - 1;
-    if (prevIndex < 0) return;
-
-    if (sound) await sound.unloadAsync();
-    setSound(null);
-
-    navigation.replace("Player", {
-      track: playlist[prevIndex],
-      playlist,
-      index: prevIndex
-    });
-  }
 
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
-        <TouchableOpacity onPress={prevTrack}>
+        <TouchableOpacity onPress={prev}> 
           <Ionicons name="play-skip-back" size={50} color="#fff" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={isPlaying ? pauseSound : () => playSound(track.preview)}>
+        <TouchableOpacity onPress={isPlaying ? pause : () => play(track)}>
           <Ionicons
             name={isPlaying ? "pause-circle" : "play-circle"}
             size={70}
@@ -112,7 +43,7 @@ export default function PlayerScreen() {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={nextTrack}>
+        <TouchableOpacity onPress={next}> 
           <Ionicons name="play-skip-forward" size={50} color="#fff" />
         </TouchableOpacity>
       </View>

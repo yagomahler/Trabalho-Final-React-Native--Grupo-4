@@ -19,7 +19,7 @@ interface Props {
   navigation: AlbumScreenNavigationProp;
 }
 
-const Album = ({ route }: Props) => {
+const Album = ({ route, navigation }: Props) => {
   const { albumId } = route.params;
   const { addMusicaFavoritos, removeMusicaFavoritos, favoritosList } = useMusicContext();
   const { play, currentTrack, isPlaying } = usePlayer();
@@ -57,11 +57,19 @@ const Album = ({ route }: Props) => {
     }
   };
 
-  const handlePlayTrack = async (track: Track, index: number) => {
+ const handlePlayTrack = async (track: Track, index: number) => {
     if (!albumDetails?.tracks.data) return;
     
-    await play(track, albumDetails.tracks.data, index);
-  };
+    let trackToPlay = track;
+    try {
+        const response = await ApiMusical.getTrack(track.id.toString());
+        trackToPlay = response.data as Track;
+        console.log("Link de preview da faixa atualizado.");
+    } catch (error) {
+        console.error("Erro ao recarregar a faixa da API:", error); 
+    }
+    await play(trackToPlay, albumDetails.tracks.data, index);
+};
 
   const renderTrackItem = ({ item, index }: { item: Track, index: number }) => (
     <View style={styles.trackItem}>
@@ -105,24 +113,27 @@ const Album = ({ route }: Props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={{ uri: albumDetails.cover_xl }} style={styles.coverImage} />
-        <Text style={styles.albumTitle}>{albumDetails.title}</Text>
-        <Text style={styles.artistName}>{albumDetails.artist.name}</Text>
-      </View>
+        <LinearGradient
+          colors={['transparent', '#aa00a9']}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 6, y: 1 }}
+          style={styles.gradient}
+        />
 
-      <FlatList
-        data={albumDetails.tracks.data}
-        renderItem={renderTrackItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContainer}
-      />
-      <LinearGradient
-        colors={['transparent', '#aa00a9']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-      />
+        <View style={{ flex: 1, zIndex: 1, position: 'relative' }}> 
+            <View style={styles.header}>
+                <Image source={{ uri: albumDetails.cover_xl }} style={styles.coverImage} />
+                <Text style={styles.albumTitle}>{albumDetails.title}</Text>
+                <Text style={styles.artistName}>{albumDetails.artist.name}</Text>
+            </View>
+
+            <FlatList
+                data={albumDetails.tracks.data}
+                renderItem={renderTrackItem}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={styles.listContainer}
+            />
+        </View>
     </View>
   );
 };
