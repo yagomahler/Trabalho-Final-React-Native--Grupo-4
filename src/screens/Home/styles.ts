@@ -113,16 +113,17 @@ export const styles = StyleSheet.create({
   },
   albumTitleText: {
     color: '#FFF',
-    fontSize: 30,
+    fontSize: 29,
     marginLeft: 110,
-    marginBottom: 40,
+    marginTop: -90,
     fontWeight: 'bold',
     paddingHorizontal: 5,
   },
   artistNameText: {
     color: '#B3B3B3',
-    marginLeft: 120,
-    fontSize: 12,
+    marginLeft: 110,
+    marginTop: 10,
+    fontSize: 17,
     paddingHorizontal: 5,
   },
   gradient: {
