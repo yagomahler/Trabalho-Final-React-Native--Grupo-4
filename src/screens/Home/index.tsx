@@ -1,13 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
-import {
-  Animated,
-  Image,
-  ScrollView,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Animated, Image, ScrollView, Text, TouchableWithoutFeedback, View, } from "react-native";
 import { usePlayer } from "../../contexts/playerContext";
 import { HomePageNavigationProp } from "../../routes/navigators/StackNavigator";
 import ApiMusical, { AlbumDetails } from "../../services/ApiMusical";
