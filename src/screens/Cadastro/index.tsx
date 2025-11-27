@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { useState } from 'react';
-import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './styles';
 import { cadastrarNovoUsuario } from '../../services/MockApi';
@@ -45,8 +45,7 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
     };
 
 return (
-    <ScrollView style={styles.container}>
-
+    
         <View style={styles.container}>
             <View style={styles.avatarContainer}>
                 <Feather name="user-plus" size={80} color="#fff" />
@@ -97,7 +96,6 @@ return (
                 style={styles.gradient}
             /> 
         </View>
-    </ScrollView>
     );
 
 };
