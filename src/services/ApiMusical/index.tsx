@@ -23,6 +23,7 @@ export interface Track {
 };
 
 export interface AlbumDetails {
+    cover_medium: any;
     id: number;
     title: string;
     cover_xl: string;

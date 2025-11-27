@@ -12,13 +12,22 @@ interface AlbumCardData {
   artistName: string;  
 }
 
+interface MusicaCardData {
+  img: string;
+  title: string;
+  artistName: string;
+  preview: string;
+}
+
 export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigation }) => {
   const [dadosCards, setDadosCards] = useState<{ img: string }[]>([]); 
   const [dadosAlbuns, setDadosAlbuns] = useState<AlbumCardData[]>([]);
+  const [dadosMusicas, setDadosMusicas] = useState<MusicaCardData[]>([]); // NOVO
 
   useEffect(() => {
     carregarArtistasAleatorios();
     carregarAlbunsAleatorios();
+    carregarMusicasAleatorias(); // NOVO
   }, []);
 
   const carregarArtistasAleatorios = async () => {
@@ -86,10 +95,41 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
     }
   };
 
+  // 🔥 NOVO — CARREGAR MÚSICAS RECOMENDADAS
+  const carregarMusicasAleatorias = async () => {
+    try {
+      const musicIds = [
+        "3135556", "1109731", "916424", "737582812", "527727312",
+        "1109739", "739119142", "15245173", "67630369", "6462793"
+      ];
+
+      const embaralhados = musicIds.sort(() => Math.random() - 0.5);
+      const selecionados = embaralhados.slice(0, 8);
+
+      const requisicoes = selecionados.map(id => ApiMusical.getTrack(id));
+      const respostas = await Promise.all(requisicoes);
+
+      const musicas = respostas.map(res => ({
+        img: res.data.album.cover_medium,
+        title: res.data.title,
+        artistName: res.data.artist.name,
+        preview: res.data.preview
+      }));
+
+      setDadosMusicas(musicas);
+    } catch (error) {
+      console.log("Erro ao carregar músicas:", error);
+    }
+  };
+
+  // 🔥 Ir para Player
+  const navegarParaMusica = (musica: MusicaCardData) => {
+    navigation.navigate("Player", { musica });
+  };
+
   const navegarParaAlbum = (albumId: number) => {
     navigation.navigate('Album', { albumId: albumId.toString() });
   };
-
 
   return (
     <ScrollView style={styles.container}>
@@ -97,14 +137,16 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
         <Image source={{ uri: "" }} style={styles.perfilImagem} />
         <Text style={styles.perfilNome}>Nome</Text>
       </View>
+
+      {/* ARTISTAS */}
       <Text style={styles.recomendados}>Artistas recomendados</Text>
       <View style={styles.cardsArtistas}>
         {dadosCards.map((item, index) => {
           const scale = new Animated.Value(1);
-          const animar = () => {  
+          const animar = () => {
             Animated.sequence([
-              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true, }),
-              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true, })
+              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true }),
+              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true })
             ]).start();
           };
           return (
@@ -116,19 +158,24 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
           );
         })}
       </View>
-      
+
+      {/* 🔥 MÚSICAS RECOMENDADAS */}
       <Text style={styles.recomendados}>Músicas recomendadas</Text>
       <View style={styles.cardsMusicas}>
-        {dadosCards.map((item, index) => {
+        {dadosMusicas.map((item, index) => {
           const scale = new Animated.Value(1);
-          const animar = () => { 
+
+          const animarEPressionar = () => {
             Animated.sequence([
-              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true, }),
-              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true, })
-            ]).start();
+              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true }),
+              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true })
+            ]).start(() => {
+              navegarParaMusica(item); // 🔥 Agora abre o Player
+            });
           };
+
           return (
-            <TouchableWithoutFeedback key={index} onPress={animar}>
+            <TouchableWithoutFeedback key={index} onPress={animarEPressionar}>
               <Animated.View style={[styles.cardBoxMusicas, { transform: [{ scale }] }]}>
                 <Image source={{ uri: item.img }} style={styles.cardImgMusicas} />
               </Animated.View>
@@ -136,7 +183,8 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
           );
         })}
       </View>
-      
+
+      {/* ÁLBUNS */}
       <Text style={styles.recomendados}>Álbuns recomendados</Text>
       <View style={styles.cardsAlbuns}>
         {dadosAlbuns.map((item, index) => {
@@ -144,8 +192,8 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({ navigat
           
           const animarEPressionar = () => {
             Animated.sequence([
-              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true, }),
-              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true, })
+              Animated.timing(scale, { toValue: 0.9, duration: 100, useNativeDriver: true }),
+              Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true })
             ]).start(() => {
                 navegarParaAlbum(item.albumId); 
             });

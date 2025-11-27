@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000',
     borderColor: '#222',
     borderBottomWidth: 1,
+    zIndex: 1,
   },
   coverImage: {
     width: 200,
