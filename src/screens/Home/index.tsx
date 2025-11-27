@@ -12,12 +12,10 @@ interface AlbumCardData {
   title: string;
   artistName: string;
 }
-
 interface ArtistaCardData {
   img: string;
   artistId: string;
 }
-
 interface MusicCardData {
   img: string;
   title: string;
@@ -25,7 +23,6 @@ interface MusicCardData {
   preview: string;
   id: string
 }
-
 export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
   navigation,
 }) => {
@@ -34,13 +31,11 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
   const [dadosAlbuns, setDadosAlbuns] = useState<AlbumCardData[]>([]);
   const [dadosMusicas, setDadosMusicas] = useState<MusicCardData[]>([]);
   const [dadosArtistas, setDadosArtistas] = useState<ArtistaCardData[]>([]);
-
   useEffect(() => {
     carregarArtistasAleatorios();
     carregarAlbunsAleatorios();
     carregarMusicasAleatorias();
   }, []);
-
   const carregarArtistasAleatorios = async () => {
     try {
       const artistasIds = [
@@ -129,18 +124,15 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
     const selecionados = embaralhados.slice(0, 12);
     const requisicoes = selecionados.map((id) => ApiMusical.getArtist(id));
     const respostas = await Promise.all(requisicoes);
-
     const artistas = respostas.map((res) => ({
       img: res.data.picture_medium,
       artistId: res.data.id.toString(),
     }));
-
     setDadosArtistas(artistas);
   } catch (error) {
     console.log("Erro ao carregar artistas:", error);
   }
 };
-
   const carregarAlbunsAleatorios = async () => {
     try {
       const albumIds = [
@@ -250,12 +242,9 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       const selecionados = embaralhados.slice(0, 12);
       const requisicoes = selecionados.map((id) => ApiMusical.getAlbum(id));
       const respostas = await Promise.all(requisicoes);
-
       const albuns = respostas.map((res) => {
         const data = res.data as AlbumDetails;
-
         const artistName = data.artist?.name || "Artista Desconhecido";
-
         return {
           img: data.cover_medium,
           albumId: data.id,
@@ -263,7 +252,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
           artistName: artistName,
         };
       });
-
       setDadosAlbuns(albuns);
     } catch (error) {
       console.log("Erro ao carregar álbuns:", error);
@@ -277,13 +265,10 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
         "3412841","3412515","366076821","1509538522","1559717","106297606","142986206",
         "129231820",
       ];
-
       const embaralhados = musicIds.sort(() => Math.random() - 0.5);
       const selecionados = embaralhados.slice(0, 8);
-
       const requisicoes = selecionados.map((id) => ApiMusical.getTrack(id));
       const respostas = await Promise.all(requisicoes);
-
       const musicas = respostas.map((res) => ({
         img: res.data.album.cover_medium,
         title: res.data.title,
@@ -291,17 +276,14 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
         preview: res.data.preview,
         id: res.data.id.toString(),
       }));
-
       setDadosMusicas(musicas);
     } catch (error) {
       console.log("Erro ao carregar músicas:", error);
     }
   };
-
   const navegarParaArtista = (artistId: string) => {
     navigation.navigate('Artista', { artistId });
   };
-
   const navegarParaMusica = (musica: MusicCardData) => {
     play({
       id: musica.id ?? 0,
@@ -310,14 +292,11 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       album: { cover_medium: musica.img },
       preview: musica.preview,
     });
-
     navigation.navigate("Player", { id: "Hello world" });
   };
-
   const navegarParaAlbum = (albumId: number) => {
     navigation.navigate("Album", { albumId: albumId.toString() });
   };
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.perfil}>
@@ -326,7 +305,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       </View>
       <Text style={styles.recomendados}>Artistas recomendados</Text>
       <View style={styles.cardsArtistas}>
-
         {dadosArtistas.map((item, index) => {
           const scale = new Animated.Value(1);
           const animar = () => {
@@ -360,7 +338,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       <View style={styles.cardsMusicas}>
         {dadosMusicas.map((item, index) => {
           const scale = new Animated.Value(1);
-
           const animarEPressionar = () => {
             Animated.sequence([
               Animated.timing(scale, {
@@ -377,7 +354,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
               navegarParaMusica(item);
             });
           };
-
           return (
             <TouchableWithoutFeedback key={index} onPress={animarEPressionar}>
               <Animated.View
@@ -402,7 +378,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       <View style={styles.cardsAlbuns}>
         {dadosAlbuns.map((item, index) => {
           const scale = new Animated.Value(1);
-
           const animarEPressionar = () => {
             Animated.sequence([
               Animated.timing(scale, {
@@ -419,7 +394,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
               navegarParaAlbum(item.albumId);
             });
           };
-
           return (
             <TouchableWithoutFeedback key={index} onPress={animarEPressionar}>
               <Animated.View
@@ -440,7 +414,6 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
           );
         })}
       </View>
-
       <LinearGradient
         colors={["transparent", "#aa00a9"]}
         start={{ x: 0, y: 1 }}

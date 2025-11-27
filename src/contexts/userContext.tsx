@@ -4,10 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type UserData = {
     id: string;
-    email: string;
-    senha: string;
-    nome: string;
-   } | null;
+    useremail: string; 
+    password: string;  
+    nome: string;    
+} | null;
 
 interface UserContextType {
   usuarioLogado: UserData;

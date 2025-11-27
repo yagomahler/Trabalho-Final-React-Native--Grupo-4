@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import ApiMusical, { AlbumDetails, Track } from "../../services/ApiMusical";
 import styles from "./styles";
-
 export default function ArtistaScreen({ route }: any) {
   const { artistId } = route.params;
   const [artist, setArtist] = useState<any>(null);

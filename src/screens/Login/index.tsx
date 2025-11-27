@@ -12,24 +12,32 @@ export interface Usuario {
     id: string; 
     useremail: string;
     password: string;
+    nome: string;
 }
 export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navigation }) => {
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
     const [usuariosList, setUsuariosList] = useState<Usuario[]>([]);
 
+const userContext = useUser();
+    
+    if (!userContext) {
+        throw new Error('Login deve ser usado dentro de um UserProvider');
+    }
+    const { login } = userContext;
+
     
     useEffect(() => {
         const loadUsers = async () => {
             try {
-                const users = await fetchAllUsuarios();
+                const users = await fetchAllUsuarios(); 
                 setUsuariosList(users);
             } catch (error) {
                 Alert.alert('Erro', (error as Error).message);
             }
         };
         loadUsers();
-    }, []); 
+    }, []);
 
     const handleLogin = () => {
         
@@ -40,6 +48,8 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
 
         if (usuarioEncontrado) {
             Alert.alert('Login bem-sucedido!');
+            login(usuarioEncontrado); 
+            // ----------------------------------------
             
             navigation.navigate('Perfil', { 
                 userId: usuarioEncontrado.id 
