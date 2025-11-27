@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { PerfilPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './styles';
-
 import {
-    deleteUsuario,
     fetchUsuarioById,
-    updateUsuario
+    updateUsuario,
+    deleteUsuario,
+    Usuario
 } from '../../services/MockApi';
 
 interface PerfilProps{
@@ -15,6 +15,7 @@ interface PerfilProps{
     route: any; }
 
 export const Perfil: React.FC<PerfilProps> = ({ navigation, route }) => {
+    const [usernome ,setUsernome]= useState ('');
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false); 
@@ -106,6 +107,16 @@ export const Perfil: React.FC<PerfilProps> = ({ navigation, route }) => {
                 <Feather name="user" size={80} color="#fff" />
                 <Text style={{ marginTop: 8, color: '#333' }}>ID: {userId}</Text>
             </View>
+
+            <TextInput
+                style={styles.input}
+                placeholder="Nome"
+                value={usernome}
+                onChangeText={setUsernome} 
+                keyboardType='default'
+                autoCapitalize='none'
+                editable={!isLoading}
+            />
 
             <TextInput
                 style={styles.input}

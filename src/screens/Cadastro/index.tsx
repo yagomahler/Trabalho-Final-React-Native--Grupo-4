@@ -1,56 +1,63 @@
 import { Feather } from '@expo/vector-icons';
-import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { useState } from 'react';
+import { Alert, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './styles';
+import { cadastrarNovoUsuario } from '../../services/MockApi';
 
-export const Cadastro: React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
-
-    const [username, setUsername] = useState('');
+export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
+    const [usernome, setUsernome] = useState('');
     const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPassword, setConfirmPassword]=useState('');
+    
 
-    const handleCadastro = () => {
-
-        if (password !== confirmPassword) {
-            console.log("As senhas não coincidem!");
-            alert("As senhas precisam ser iguais. Tente novamente.");
+    const handleCadastro = async () => { 
+        if (!useremail || !password || !usernome) {
+            Alert.alert('Erro', 'Por favor, preencha todos os campos.'); 
             return;
         }
-
-        const novoUsuario = {
-    name: username,
-    email: useremail,
-    password: password,
-};
-
-
-        axios.post('https://69236cb13ad095fb847084f7.mockapi.io/backstage/usuarios', novoUsuario)
-        .then(response => {
-            console.log('Usuário cadastrado com sucesso:', response.data);
-            alert('Cadastro realizado com sucesso!');
+        
+        const novoUsuarioPayload = { 
+            usernome: usernome,
+            useremail: useremail,
+            password: password,
+        };
+        
+        try {
+            const novoUsuario = await cadastrarNovoUsuario(novoUsuarioPayload);
+            
+            Alert.alert(
+                'Sucesso!', 
+                `Usuário ${novoUsuario.useremail} cadastrado com sucesso!`
+            );
+            
+            // Redireciona para a tela de Login
             navigation.navigate('Login', { id: 'grupo 04' });
-        })
-        .catch(error => {
+            
+        } catch (error) {
+            // Captura o erro lançado pelo serviço
+            Alert.alert('Erro', (error as Error).message); 
             console.error('Erro ao cadastrar usuário:', error);
-            alert('Erro ao realizar cadastro. Tente novamente.');
-        });
-    };  
-    return (
+        }
+    };
+
+return (
+    <ScrollView style={styles.container}>
+
         <View style={styles.container}>
             <View style={styles.avatarContainer}>
-                <Feather name="user-plus" size={80} color="#fff" marginLeft={15}/>
+                <Feather name="user-plus" size={80} color="#fff" />
             </View>
             <Text style={styles.title}>Cadastrar novo usuário</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Nome"
                 placeholderTextColor="#aaa"
-                onChangeText={setUsername}
-                value={username}
+                onChangeText={setUsernome}
+                value={usernome}
             />
             <TextInput
                 style={styles.input}
@@ -88,9 +95,10 @@ export const Cadastro: React.FC<{ navigation: CadastroPageNavigationProp }> = ({
                 start={{ x: 0, y: 1 }}
                 end={{ x: 6, y: 1 }}
                 style={styles.gradient}
-            />
+            /> 
         </View>
+    </ScrollView>
     );
-};
 
+};
 export default Cadastro;

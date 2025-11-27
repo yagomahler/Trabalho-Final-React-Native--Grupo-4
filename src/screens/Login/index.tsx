@@ -1,76 +1,54 @@
 import { Feather } from '@expo/vector-icons';
-import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState, useEffect } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react'; 
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LoginPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { styles } from './style';
+import { fetchAllUsuarios} from '../../services/MockApi'; 
 import { useUser } from '../../contexts/userContext';
 
 
-interface UsuarioAPI {
-    id: string;
-    email: string;
-    senha: string;
-    nome: string;
+export interface Usuario {
+    id: string; 
+    useremail: string;
+    password: string;
 }
-
 export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navigation }) => {
-    const [email, setEmail] = useState('');
+    const [useremail, setUseremail] = useState('');
     const [password, setPassword] = useState('');
-    const [usuariosList, setUsuariosList] = useState<UsuarioAPI[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [usuariosList, setUsuariosList] = useState<Usuario[]>([]);
 
-    const userContext = useUser();
-
-
+    
     useEffect(() => {
-        const fetchUsers = async () => {
+        const loadUsers = async () => {
             try {
-                const response = await axios.get('https://69236cb13ad095fb847084f7.mockapi.io/usuarios');
-                setUsuariosList(response.data);
-                setLoading(false);
+                const users = await fetchAllUsuarios();
+                setUsuariosList(users);
             } catch (error) {
-                console.error('Erro ao buscar usuários:', error);
-                Alert.alert('Erro', 'Não foi possível carregar a lista de usuários.');
-                setLoading(false);
+                Alert.alert('Erro', (error as Error).message);
             }
         };
+        loadUsers();
+    }, []); 
 
-        fetchUsers();
-    }, []);
-
-    const handleLogin = async () => {
-         if (!userContext) {
-            Alert.alert('Erro', 'Serviço de login indisponível (UserProvider não encontrado).');
-            return;
-        }
+    const handleLogin = () => {
+        
         const usuarioEncontrado = usuariosList.find(
             (usuario) =>
-                usuario.email === email && usuario.senha === password
+                usuario.useremail === useremail && usuario.password === password
         );
 
-        try {
-            if (usuarioEncontrado) {
-
-                await userContext?.login({
-                    id: usuarioEncontrado.id,
-                    email: usuarioEncontrado.email,
-                    senha: usuarioEncontrado.senha,
-                    nome: usuarioEncontrado.nome,
-                });
-
-                Alert.alert('Login bem-sucedido!');
-                navigation.navigate('Perfil', { userId: 'Grupo4' });
-            } else {
-                Alert.alert('Credenciais inválidas. Tente novamente.');
-            }
+        if (usuarioEncontrado) {
+            Alert.alert('Login bem-sucedido!');
+            
+            navigation.navigate('Perfil', { 
+                userId: usuarioEncontrado.id 
+            });
+        } else {
+            Alert.alert('Erro', 'Credenciais inválidas. Tente novamente.');
         }
-        catch (error) {
-            console.error('Erro ao efetuar login:', error);
-        }
+
     };
-
 
     return (
         <View style={styles.container}>
@@ -81,8 +59,8 @@ export const Login: React.FC<{ navigation: LoginPageNavigationProp }> = ({ navig
                 style={styles.input}
                 placeholder="E-mail"
                 placeholderTextColor="#aaa"
-                onChangeText={setEmail}
-                value={email}
+                onChangeText={setUseremail}
+                value={useremail}
                 autoCapitalize="none"
             />
             <TextInput
