@@ -43,6 +43,11 @@ export interface SearchResponse {
 }
 
 export const ApiMusical = {
+
+getArtistTopTracks: async (artistId: string) => {
+  return ApiDeezer.get(`/artist/${artistId}/top?limit=10`);
+}, 
+
   getAlbum: async (albumId: string): Promise<AxiosResponse> => {
     return ApiDeezer.get(`/album/${albumId}`);  
   },
