@@ -22,7 +22,7 @@ interface AlbumCardData {
 
 interface ArtistaCardData {
   img: string;
-  artistIid: string;
+  artistId: string;
 }
 
 interface MusicCardData {
@@ -40,6 +40,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
   const [dadosCards, setDadosCards] = useState<{ img: string }[]>([]);
   const [dadosAlbuns, setDadosAlbuns] = useState<AlbumCardData[]>([]);
   const [dadosMusicas, setDadosMusicas] = useState<MusicCardData[]>([]);
+  const [dadosArtistas, setDadosArtistas] = useState<ArtistaCardData[]>([]);
 
   useEffect(() => {
     carregarArtistasAleatorios();
@@ -131,19 +132,21 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
         "1245",
         "215594",
       ];
-      const embaralhados = artistasIds.sort(() => Math.random() - 0.5);
-      const selecionados = embaralhados.slice(0, 12);
-      const requisicoes = selecionados.map((id) => ApiMusical.getArtist(id));
-      const respostas = await Promise.all(requisicoes);
-      const artistas = respostas.map((res) => ({
-        img: res.data.picture_medium,
-        artistId: res.data.id.toString(),
-      }));
-      setDadosCards(artistas);
-    } catch (error) {
-      console.log("Erro ao carregar artistas:", error);
-    }
-  };
+    const embaralhados = artistasIds.sort(() => Math.random() - 0.5);
+    const selecionados = embaralhados.slice(0, 12);
+    const requisicoes = selecionados.map((id) => ApiMusical.getArtist(id));
+    const respostas = await Promise.all(requisicoes);
+
+    const artistas = respostas.map((res) => ({
+      img: res.data.picture_medium,
+      artistId: res.data.id.toString(),
+    }));
+
+    setDadosArtistas(artistas);
+  } catch (error) {
+    console.log("Erro ao carregar artistas:", error);
+  }
+};
 
   const carregarAlbunsAleatorios = async () => {
     try {
@@ -331,7 +334,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
       <Text style={styles.recomendados}>Artistas recomendados</Text>
       <View style={styles.cardsArtistas}>
 
-        {dadosCards.map((item, index) => {
+        {dadosArtistas.map((item, index) => {
           const scale = new Animated.Value(1);
           const animar = () => {
             Animated.sequence([
@@ -346,7 +349,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
                 useNativeDriver: true,
               }),
             ]).start(() => {
-              navegarParaArtista(item.artistaId);
+              navegarParaArtista(item.artistId);
             });
           };
           return (
