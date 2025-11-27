@@ -68,6 +68,9 @@ export const ApiMusical = {
     return ApiDeezer.get(`/artist/${artistId}`);
   },
 
+  getArtistAlbums: async (artistId: string): Promise<AxiosResponse<DeezerSearchResponse<AlbumDetails>>> => {
+    return ApiDeezer.get(`/artist/${artistId}/albums`);
+  },
   getTrack: async (trackId: string): Promise<AxiosResponse<Track>> => {
     return ApiDeezer.get(`/track/${trackId}`);
   },

@@ -2,53 +2,85 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    padding: 20,
+    flex: 1,
+    backgroundColor: "#000",
+    zIndex: 2,
+    marginTop: 35,
   },
-
   loading: {
     marginTop: 50,
     textAlign: "center",
     fontSize: 18,
+    color: "#fff",
+    zIndex: 2,
   },
-
   artistImage: {
     width: 180,
     height: 180,
+    marginTop: 50,
     borderRadius: 90,
     alignSelf: "center",
+    borderWidth: 1,
+    borderColor: "#000",
+    boxShadow: "1px 1px 1px 1px #aa00a9",
+    zIndex: 2,
   },
-
   artistName: {
     fontSize: 28,
     fontWeight: "bold",
     marginTop: 20,
     textAlign: "center",
+    color: "#fff",
+    zIndex: 2,
   },
-
   sectionTitle: {
-    marginTop: 30,
+    marginTop: 15,
     fontSize: 20,
+    marginLeft: 20,
     fontWeight: "bold",
+    color: "#fff",
+    zIndex: 2,
   },
-
+  sectionDiscografia: {
+    marginTop: 10,
+    fontSize: 20,
+    marginLeft: 20,
+    fontWeight: "bold",
+    color: "#fff",
+    zIndex: 2,
+  },
   trackItem: {
     paddingVertical: 8,
     fontSize: 16,
+    color: "#fff",
+    marginLeft: 20,
+    zIndex: 2,
   },
-
   albumCard: {
     marginRight: 15,
     width: 120,
+    zIndex: 2,
   },
-
   albumCover: {
     width: 120,
     height: 120,
+    marginLeft: 20,
+    marginTop: 10,
     borderRadius: 8,
+    zIndex: 2,
   },
-
   albumTitle: {
     marginTop: 6,
-    fontSize: 14,
+    fontSize: 13,
+    color: "#fff",
+    zIndex: 2,
+    marginLeft: 40,
+  },
+  gradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: "150%",
+    height: "150%",
   },
 });

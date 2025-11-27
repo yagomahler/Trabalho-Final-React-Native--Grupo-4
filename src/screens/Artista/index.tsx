@@ -1,46 +1,34 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, FlatList, ScrollView } from "react-native";
+import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import ApiMusical, { AlbumDetails, Track } from "../../services/ApiMusical";
 import styles from "./styles";
 
 export default function ArtistaScreen({ route }: any) {
   const { artistId } = route.params;
-
   const [artist, setArtist] = useState<any>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [albums, setAlbums] = useState<AlbumDetails[]>([]);
-
   useEffect(() => {
-  async function loadData() {
-    try {
-      const artistResponse = await ApiMusical.getArtist(artistId);
-      const trackResponse = await ApiMusical.getArtistTopTracks(artistId);
-      const albumResponse = await ApiMusical.getAlbum(artistId);
-
-      setArtist(artistResponse.data);
-      setTracks(trackResponse.data.data);
-      setAlbums(albumResponse.data);
-    
-    } catch (error) {
-      console.log("Erro ao buscar dados do artista: ", error);
+    async function loadData() {
+      try {
+        const artistResponse = await ApiMusical.getArtist(artistId);
+        const trackResponse = await ApiMusical.getArtistTopTracks(artistId);
+        const albumsResponse = await ApiMusical.getArtistAlbums(artistId); 
+        setArtist(artistResponse.data);
+        setTracks(trackResponse.data.data);
+        setAlbums(albumsResponse.data.data); 
+      } catch (error) {
+        console.log("Erro ao buscar dados do artista: ", error);
+      }
     }
-  }
-
     loadData();
-  }, []);
-
+  }, [artistId]);
   if (!artist) return <Text style={styles.loading}>Carregando...</Text>;
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      
-      
       <Image source={{ uri: artist.picture_big }} style={styles.artistImage} />
-
-      
       <Text style={styles.artistName}>{artist.name}</Text>
-
-      
       <Text style={styles.sectionTitle}>Músicas mais ouvidas</Text>
       <FlatList
         data={tracks}
@@ -49,9 +37,7 @@ export default function ArtistaScreen({ route }: any) {
           <Text style={styles.trackItem}>{item.title}</Text>
         )}
       />
-
-      
-      <Text style={styles.sectionTitle}>Discografia</Text>
+      <Text style={styles.sectionDiscografia}>Discografia</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -67,6 +53,12 @@ export default function ArtistaScreen({ route }: any) {
           </View>
         )}
       />
+      <LinearGradient
+        colors={["transparent", "#aa00a9"]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 6, y: 1 }}
+        style={styles.gradient}
+        />
     </ScrollView>
   );
 }
