@@ -3,23 +3,29 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: "#000",
+    zIndex: 2,
+    marginTop: 35,
   },
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#121212',
+    zIndex: 2,
   },
   errorText: {
     color: 'white',
     fontSize: 16,
+    zIndex: 2,
   },
   header: {
     alignItems: 'center',
     paddingTop: 40,
     paddingBottom: 20,
-    backgroundColor: '#1E1E1E',
+    backgroundColor: '#000',
+    borderColor: '#222',
+    borderBottomWidth: 1,
   },
   coverImage: {
     width: 200,
@@ -30,6 +36,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
+    zIndex: 2,
   },
   albumTitle: {
     fontSize: 24,
@@ -37,14 +44,17 @@ export const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     paddingHorizontal: 20,
+    zIndex: 2,
   },
   artistName: {
     fontSize: 16,
     color: '#B3B3B3',
     marginTop: 5,
+    zIndex: 2,
   },
   listContainer: {
     paddingBottom: 20,
+    zIndex: 2,
   },
   trackItem: {
     flexDirection: 'row',
@@ -53,31 +63,44 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    zIndex: 2,
   },
   trackNumber: {
     color: '#B3B3B3',
     fontSize: 16,
     marginRight: 10,
     width: 25,
+    zIndex: 2,
   },
   trackInfo: {
     flex: 1,
     marginRight: 10,
+    zIndex: 2,
   },
   trackTitle: {
     color: 'white',
     fontSize: 16,
+    zIndex: 2,
   },
   trackArtist: {
     color: '#B3B3B3',
     fontSize: 14,
+    zIndex: 2,
   },
   playButton: {
     padding: 5,
     marginRight: 10,
+    zIndex: 2,
   },
   favoriteButton: {
     padding: 5,
-  }
-
+    zIndex: 2,
+  },
+  gradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: "150%",
+    height: "150%",
+  },
 });

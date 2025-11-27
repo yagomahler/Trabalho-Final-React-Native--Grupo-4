@@ -111,6 +111,20 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     zIndex: 2,
   },
+  albumTitleText: {
+    color: '#FFF',
+    fontSize: 30,
+    marginLeft: 110,
+    marginBottom: 40,
+    fontWeight: 'bold',
+    paddingHorizontal: 5,
+  },
+  artistNameText: {
+    color: '#B3B3B3',
+    marginLeft: 120,
+    fontSize: 12,
+    paddingHorizontal: 5,
+  },
   gradient: {
     position: "absolute",
     top: 0,
@@ -118,17 +132,4 @@ export const styles = StyleSheet.create({
     width: "150%",
     height: "150%",
   },
-  albumTitleText: {
-    color: '#FFF',
-    marginTop: 8,
-    fontSize: 14,
-    fontWeight: 'bold',
-    paddingHorizontal: 5,
-  },
-  artistNameText: {
-    color: '#B3B3B3',
-    fontSize: 12,
-    paddingHorizontal: 5,
-  },
-
 });

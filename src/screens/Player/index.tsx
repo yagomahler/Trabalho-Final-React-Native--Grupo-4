@@ -11,7 +11,7 @@ export default function PlayerScreen() {
   const navigation = useNavigation() as any;
 
   const defaultTrack = {
-    id: 1987151117,
+    id: 1987151117, 
     title: "Outubro de Fases",
     artist: { name: "Clube da Montanha" },
     album: {
@@ -101,24 +101,25 @@ export default function PlayerScreen() {
     <View style={styles.container}>
       <View style={styles.controls}>
         <TouchableOpacity onPress={prevTrack}>
-          <Ionicons name="play-skip-back" size={24} color="#fff" />
+          <Ionicons name="play-skip-back" size={50} color="#fff" />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={isPlaying ? pauseSound : () => playSound(track.preview)}>
           <Ionicons
             name={isPlaying ? "pause-circle" : "play-circle"}
-            size={48}
+            size={70}
             color="#fff"
           />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={nextTrack}>
-          <Ionicons name="play-skip-forward" size={24} color="#fff" />
+          <Ionicons name="play-skip-forward" size={50} color="#fff" />
         </TouchableOpacity>
       </View>
+      <View style={styles.trackImage}>
 
       <Image
-        style={{ width: 220, height: 220, alignSelf: "center", marginTop: 30 }}
+        style={{ width: 320, height: 320, alignSelf: "center" }}
         source={{
           uri:
             track?.album?.cover_medium ||
@@ -127,6 +128,7 @@ export default function PlayerScreen() {
             undefined
         }}
       />
+      </View>
 
       <Text style={styles.trackTitle}>
         {track?.title} — {track?.artist?.name}

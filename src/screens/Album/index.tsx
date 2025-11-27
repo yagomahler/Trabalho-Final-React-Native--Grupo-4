@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Parametros } from '../../routes/navigators/StackNavigator'
-import { ApiMusical, AlbumDetails, Track } from '../../services/ApiMusical';
-import Icon from 'react-native-vector-icons/Ionicons'; 
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useMusicContext } from '../../contexts/musicContext';
 import { usePlayer } from '../../contexts/playerContext';
+import { Parametros } from '../../routes/navigators/StackNavigator';
+import { AlbumDetails, ApiMusical, Track } from '../../services/ApiMusical';
 
-import {styles} from './styles';
+import { styles } from './styles';
 
 type AlbumScreenRouteProp = RouteProp<Parametros, 'Album'>;
 type AlbumScreenNavigationProp = StackNavigationProp<Parametros, 'Album'>;
@@ -115,6 +116,12 @@ const Album = ({ route }: Props) => {
         renderItem={renderTrackItem}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContainer}
+      />
+      <LinearGradient
+        colors={['transparent', '#aa00a9']}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 6, y: 1 }}
+        style={styles.gradient}
       />
     </View>
   );
