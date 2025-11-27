@@ -4,23 +4,31 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
-    paddingTop: 40,
-    paddingHorizontal: 15,
+    zIndex: 2,
+    marginTop: 35,
   },
   headerTitle: {
     fontSize: 28,
+    marginTop: 20,
+    textAlign: 'center',
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
+    zIndex: 2,
   },
   inputGroup: {
     marginBottom: 20,
+    zIndex: 2,
+    marginLeft: 20,
+    height: 70,
+    width: "90%",
   },
   inputTitle: {
     fontSize: 16,
     color: '#B3B3B3',
     marginBottom: 5,
     fontWeight: 'bold',
+    zIndex: 2,
   },
   textInput: {
     height: 45,
@@ -31,9 +39,11 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     borderWidth: 1,
     borderColor: '#333',
+    zIndex: 2,
   },
   resultsSection: {
     flex: 1,
+    zIndex: 2,
   },
   sectionTitle: {
     fontSize: 20,
@@ -44,6 +54,8 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#333',
     paddingBottom: 5,
+    zIndex: 2,
+    marginLeft: 20,
   },
   resultItem: {
     flexDirection: 'row',
@@ -51,39 +63,56 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#222',
+    zIndex: 2,
+    marginLeft: 20,
   },
   resultImage: {
     width: 50,
     height: 50,
     borderRadius: 5,
     marginRight: 15,
+    zIndex: 2,
   },
   resultInfo: {
     flex: 1,
     justifyContent: 'center',
+    zIndex: 2,
   },
   resultTitle: {
     fontSize: 16,
     color: 'white',
     fontWeight: '600',
+    zIndex: 2,
   },
   resultSubtitle: {
     fontSize: 14,
     color: '#B3B3B3',
+    zIndex: 2,
   },
   playButton: {
     padding: 8,
+    zIndex: 2,
   },
   separator: {
     height: 1,
     backgroundColor: '#1C1C1C',
+    zIndex: 2,
   },
   noResultsText: {
     color: '#B3B3B3',
     textAlign: 'center',
     marginTop: 20,
+    zIndex: 2,
   },
   loadingContainer: {
     paddingVertical: 20,
-  }
+    zIndex: 2,
+  },
+  gradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: "150%",
+    height: "150%",
+  },
 });

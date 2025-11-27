@@ -6,6 +6,7 @@ import { usePlayer } from '../../contexts/playerContext';
 import { HomePageNavigationProp, Parametros } from '../../routes/navigators/StackNavigator';
 import { AlbumDetails, ApiMusical, Artist, Track } from '../../services/ApiMusical';
 import { styles } from './styles'
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 interface SearchResults {
@@ -206,6 +207,12 @@ export const Search: React.FC<{ navigation: HomePageNavigationProp }> = ({ navig
                     </>
                 )}
             </View>
+            <LinearGradient
+                    colors={["transparent", "#aa00a9"]}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 6, y: 1 }}
+                    style={styles.gradient}
+                  />
         </View>
     );
 };
