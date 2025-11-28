@@ -6,6 +6,7 @@ import { usePlayer } from "../../contexts/playerContext";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { styles } from "./styles";
+import GradientBackground from "../../components/GradientBackground";
 
 const Favoritos = () => {
   const { favoritosList, removeMusicaFavoritos } = useMusicContext();
@@ -36,12 +37,7 @@ const Favoritos = () => {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['transparent', '#aa00a9']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-      />
+      <GradientBackground/>
 
       {favoritosList.length === 0 ? (
         <View style={styles.emptyContainer}>

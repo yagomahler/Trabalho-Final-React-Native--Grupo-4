@@ -17,6 +17,7 @@ export const Input: React.FC<InputProps> = ({
   customStyle,
   ...rest 
 }) => {
+  
   return (
     <TextInput
       style={[styles.input, customStyle]}

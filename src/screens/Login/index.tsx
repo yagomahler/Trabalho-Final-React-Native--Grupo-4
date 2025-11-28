@@ -6,6 +6,7 @@ import { LoginPageNavigationProp } from '../../routes/navigators/StackNavigator'
 import { styles } from './style';
 import { fetchAllUsuarios} from '../../services/MockApi'; 
 import { useUser } from '../../contexts/userContext';
+import GradientBackground from '../../components/GradientBackground';
 
 
 export interface Usuario {
@@ -90,12 +91,8 @@ const userContext = useUser();
             <TouchableOpacity >
                 <Text style={styles.linkText}>Esqueceu a Senha?</Text>
             </TouchableOpacity>
-            <LinearGradient
-                colors={['transparent', '#aa00a9']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 6, y: 1 }}
-                style={styles.gradient}
-            />
+            
+            <GradientBackground/>
         </View>
     );
 };

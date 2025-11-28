@@ -10,6 +10,7 @@ import { Parametros } from '../../routes/navigators/StackNavigator';
 import { AlbumDetails, ApiMusical, Track } from '../../services/ApiMusical';
 
 import { styles } from './styles';
+import GradientBackground from '../../components/GradientBackground';
 
 type AlbumScreenRouteProp = RouteProp<Parametros, 'Album'>;
 type AlbumScreenNavigationProp = StackNavigationProp<Parametros, 'Album'>;
@@ -113,12 +114,7 @@ const Album = ({ route, navigation }: Props) => {
 
   return (
     <View style={styles.container}>
-        <LinearGradient
-          colors={['transparent', '#aa00a9']}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 6, y: 1 }}
-          style={styles.gradient}
-        />
+        <GradientBackground/>
 
         <View style={{ flex: 1, zIndex: 1, position: 'relative' }}> 
             <View style={styles.header}>

@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { styles } from './styles';
+import GradientBackground from '../../components/GradientBackground';
 
 export const Sobre = () => {
   return (
@@ -47,13 +48,11 @@ export const Sobre = () => {
         pela tela de Login e pelo fluxo de autenticação do usuário.
       </Text>
 
-      <LinearGradient
-        colors={['transparent', '#aa00a9']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-      />
+      <GradientBackground/>
+      
     </ScrollView>
+
+    
   );
 };
 

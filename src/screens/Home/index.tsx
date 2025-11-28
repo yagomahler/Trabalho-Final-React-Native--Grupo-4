@@ -5,6 +5,7 @@ import { usePlayer } from "../../contexts/playerContext";
 import { HomePageNavigationProp } from "../../routes/navigators/StackNavigator";
 import ApiMusical, { AlbumDetails } from "../../services/ApiMusical";
 import { styles } from "./styles";
+import GradientBackground from "../../components/GradientBackground";
 
 interface AlbumCardData {
   img: string;
@@ -415,12 +416,7 @@ export const Home: React.FC<{ navigation: HomePageNavigationProp }> = ({
           );
         })}
       </View>
-      <LinearGradient
-        colors={["transparent", "#aa00a9"]}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-      />
+      <GradientBackground/>
     </ScrollView>
   );
 };

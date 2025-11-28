@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import ApiMusical, { AlbumDetails, Track } from "../../services/ApiMusical";
 import styles from "./styles";
+import GradientBackground from "../../components/GradientBackground";
 export default function ArtistaScreen({ route }: any) {
   const { artistId } = route.params;
   const [artist, setArtist] = useState<any>(null);
@@ -52,12 +53,7 @@ export default function ArtistaScreen({ route }: any) {
           </View>
         )}
       />
-      <LinearGradient
-        colors={["transparent", "#aa00a9"]}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-        />
+      <GradientBackground/>
     </ScrollView>
   );
 }

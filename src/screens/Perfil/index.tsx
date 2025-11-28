@@ -9,6 +9,7 @@ import {
     deleteUsuario,
     Usuario
 } from '../../services/MockApi';
+import GradientBackground from '../../components/GradientBackground';
 
 interface PerfilProps{
     navigation: PerfilPageNavigationProp;
@@ -155,6 +156,8 @@ export const Perfil: React.FC<PerfilProps> = ({ navigation, route }) => {
             <TouchableOpacity disabled={isLoading}>
             <Text style={styles.linkText}>Ajuda e Comentarios</Text>
             </TouchableOpacity>
+
+            <GradientBackground/>
             
         </View>
     );

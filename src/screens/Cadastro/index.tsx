@@ -5,6 +5,8 @@ import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CadastroPageNavigationProp } from '../../routes/navigators/StackNavigator';
 import { cadastrarNovoUsuario } from '../../services/MockApi';
 import { styles } from './styles';
+import GradientBackground from '../../components/GradientBackground';
+import Input from '../../components/Input';
 
 export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = ({ navigation }) => {
     const [usernome, setUsernome] = useState('');
@@ -33,11 +35,11 @@ export const Cadastro : React.FC<{ navigation: CadastroPageNavigationProp }> = (
                 `Usuário ${novoUsuario.useremail} cadastrado com sucesso!`
             );
             
-            // Redireciona para a tela de Login
+          
             navigation.navigate('Login', { id: 'grupo 04' });
             
         } catch (error) {
-            // Captura o erro lançado pelo serviço
+          
             Alert.alert('Erro', (error as Error).message); 
             console.error('Erro ao cadastrar usuário:', error);
         }
@@ -74,6 +76,7 @@ return (
                 secureTextEntry
             />
 
+
             <TextInput
                 style={styles.input}
                 placeholder="Confirmar Senha"
@@ -88,12 +91,8 @@ return (
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home', {id: "Grupo4"})}>
                 <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
-            <LinearGradient
-                colors={['transparent', '#aa00a9']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 6, y: 1 }}
-                style={styles.gradient}
-            /> 
+            
+            <GradientBackground/>
         </View>
     );
 

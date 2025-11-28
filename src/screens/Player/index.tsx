@@ -5,6 +5,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { usePlayer } from '../../contexts/playerContext';
 import { styles } from './styles';
+import GradientBackground from '../../components/GradientBackground';
 
 export default function PlayerScreen() {
   const navigation = useNavigation() as any;
@@ -65,12 +66,8 @@ export default function PlayerScreen() {
         {track?.title} — {track?.artist?.name}
       </Text>
 
-      <LinearGradient
-        colors={['transparent', '#aa00a9']}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 6, y: 1 }}
-        style={styles.gradient}
-      />
+      <GradientBackground/>
+      
     </View>
   );
 }
