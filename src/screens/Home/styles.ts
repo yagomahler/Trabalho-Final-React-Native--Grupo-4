@@ -140,11 +140,4 @@ export const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
   },
-  gradient: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    width: "150%",
-    height: "150%",
-  },
 });
